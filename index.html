@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Form Submission</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #f4f6fb;
+      color: #1f2a44;
+    }
+
+    .card {
+      width: min(92vw, 420px);
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(31, 42, 68, 0.12);
+      padding: 1.5rem;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 1.35rem;
+    }
+
+    p {
+      margin-top: 0.25rem;
+      color: #4a5673;
+    }
+
+    form {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      margin-top: 0.35rem;
+      border: 1px solid #cfd6e6;
+      border-radius: 8px;
+      padding: 0.65rem 0.7rem;
+      font: inherit;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 0.72rem 0.9rem;
+      background: #2f67ff;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2454d6;
+    }
+
+    #confirmation {
+      display: none;
+      margin-top: 1rem;
+      border-radius: 8px;
+      background: #eef5ff;
+      border: 1px solid #cde0ff;
+      padding: 0.9rem;
+      color: #19439a;
+      line-height: 1.45;
+    }
+
+    #confirmation strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Contact Form</h1>
+    <p>Fill in the form and submit to see a confirmation message.</p>
+
+    <form id="contact-form">
+      <label>
+        Name
+        <input type="text" id="name" name="name" required />
+      </label>
+
+      <label>
+        Email
+        <input type="email" id="email" name="email" required />
+      </label>
+
+      <label>
+        Message
+        <textarea id="message" name="message" required></textarea>
+      </label>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <section id="confirmation" aria-live="polite"></section>
+  </main>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const confirmation = document.getElementById('confirmation');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+
+      confirmation.innerHTML = `
+        <strong>Form submitted successfully!</strong>
+        Thank you, ${name}. We received your message and will contact you at ${email}.
+      `;
+      confirmation.style.display = 'block';
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
